@@ -1,0 +1,45 @@
+single volume neutron scatter camera gamma response (neutron point source, w/o segmentation)
+10 10 -1.096 +111 -112 +121 -122 +131 -132          imp:h=1 imp:n=1 $ 20 x 20 x 20 cm**3 ej-276
+20 20  -1.205e-3       -200 #10                     imp:h=0 imp:n=1 $ problem boundary (air)
+30  0                                        +200   imp:h=0 imp:n=0 $ Kill
+
+111 px  -10 $ 20 x 20 x 20 cm**3 ej-309
+112 px  +10
+121 py  -10
+122 py  +10
+131 pz  +10
+132 pz  +30
+c
+200 so 100 $ problem boundary
+
+m10  1001. 0.93 $ ej-276 H:C = 0.93 density = 1.096 g/cm3
+     6012. 1
+m20  6012.   -0.000124    $  Air
+     7014.   -0.755268
+     8016.   -0.231781
+     18040.  -0.012827
+c
+mode n h
+rand seed=11
+c       EMAX EAN TABL  J  ISTRG  J  RECL  J  J  J  MCS  INT  ELS  EFAC 
+phys:h  105  0   -1    j    0    j   0    j  j  j   0   -1    0   j
+c       EMAX EMCNF IUNR J J J COILF CUTN J J J I_INT_MODEL I_ELS_MODEL
+phys:n  105  105   j    j j j 1.001 -1   j j j j           j
+c phys:#  105
+nps 1e7
+cut:n j 0
+cut:h j 0
+c cut:# j 0
+c
+c point source of neutrons, isotropic emission, 1 MeV energy, 10 cm from the SVSC
+sdef erg=1
+     pos=0 0 0
+     par = n
+c  PTRAC card for the first run
+c
+ptrac filter=10,icl event=bnk file=bin write=all type=h max=2e9
+c prdmp  1e5 1e4 1 2 1e4
+f11:n 131
+c11 0 1
+print 10
+
