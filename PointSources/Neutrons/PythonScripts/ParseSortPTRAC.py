@@ -4,14 +4,11 @@ Created on Tue Jul  2 12:35:46 2019
 
 @author: Ilker Meric
 
-Detector: SVSC w/o segmentation
+Parse MCNP PTRAC output and sort the events in the succession order.
 
-1. Determine recoil proton energies in the 1st, 2nd and 3rd scatter events
-as well as the mean energy deposited in each.
-2. Determine the average distance between the {1st and 2nd scatter events + mean distance} and
-{2nd and 3rd scatter events + mean distance}. 
-3. Determine the average TOF between the {1st and 2nd scatter events + mean TOF} and
-{2nd and 3rd scatter events + mean TOF}.
+Note: This script only keeps track of BankType() == 12, i.e. only
+Compton recoil electrons. Secondry electrons from photoelectric effect
+& pair production are ignored for now.
 
 """
 

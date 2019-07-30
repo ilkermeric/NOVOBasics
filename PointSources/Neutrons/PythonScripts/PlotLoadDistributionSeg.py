@@ -4,7 +4,7 @@ Created on Sat Jul 13 01:07:13 2019
 
 @author: Ilker Meric
 
-Score load distributions and plot 2D load distributions for segmented SVSC.
+Score load distributions and plot 2D load distributions for segmented PC.
 
 Note: Multiple hits in the same particle history in a segment are counted as a single count.
 
@@ -23,12 +23,12 @@ def read_file(file):
 if(len(sys.argv) != 6):
     raise RuntimeError ("Please pass all the arguments!" ) 
 filename = sys.argv[1]
-FractionIncidentNeutrons = float(sys.argv[2])
-TotalNeutrons = float(sys.argv[3])
-IncidentNeutronEnergy = float(sys.argv[4])
+FractionIncidentParticles = float(sys.argv[2])
+TotalParticles = float(sys.argv[3])
+IncidentParticleEnergy = float(sys.argv[4])
 SegmentSize = float(sys.argv[5])
 
-IncidentNeutrons = FractionIncidentNeutrons * TotalNeutrons
+IncidentParticles = FractionIncidentParticles * TotalParticles
 
 data = read_file(filename)
 imax = len(data)
@@ -105,8 +105,8 @@ h2d = np.flipud(h2d)
 
 TotalLoad = np.sum(np.sum(h2d))
 
-h2d = h2d / IncidentNeutrons  # Normalized entries
-TotalLoad = TotalLoad / IncidentNeutrons
+h2d = h2d / IncidentParticles  # Normalized entries
+TotalLoad = TotalLoad / IncidentParticles
 HighestLoad = np.amax(h2d)
 SmallestLoad = np.amin(h2d)
 
@@ -119,15 +119,21 @@ ax = f.add_subplot(111)
 plt.pcolormesh(bins_x, bins_y, h2d, edgecolors='k', norm=LogNorm())
 
 v1 = np.linspace(SmallestLoad, HighestLoad, 5, endpoint=True)
-plt.title( str(IncidentNeutronEnergy) + " MeV neutrons with segmentation")
+plt.title( str(IncidentParticleEnergy) + " MeV neutrons with segmentation")
 plt.xlabel("y [cm]")
 plt.ylabel("z [cm]")
 #plt.yscale("log")
 #plt.colorbar().set_label("Total load per incident neutron", rotation=270, labelpad=20)
 cb = plt.colorbar(ticks=v1)
-cb.set_label("Total load per incident neutron", rotation=270, labelpad=20)
+cb.set_label("Load per incident neutron", rotation=270, labelpad=20)
 cb.ax.set_yticklabels(["{:4.2e}".format(i) for i in v1])
 
 plt.savefig('2DLoadDistribution.png', dpi=250, bbox_inches='tight')
+
+
+f1 = open('DetectorLoad','a')
+f1.write('Total load (hits / incident photon) is: ' + str(TotalLoad) + '\n')
+f1.write('Max. load (hits / incident photon / segment) is: ' + str(HighestLoad) + '\n')
+f1.write('Min. load (hits / incident photon / segment) is: ' + str(SmallestLoad) + '\n')
 
 #plt.show()

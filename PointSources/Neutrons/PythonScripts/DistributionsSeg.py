@@ -18,10 +18,10 @@ Distance and TOF:
 
 Note: Even if there are multiple hits in a given segment (invalid events), these are still used
 in the following analyses. If there are multiple hits in a given segment, then only the data 
-corresponding to the first (n,p) collision are used !
+corresponding to the first collision are used !
  
 Usage:
-    ./python DistributionsNoSeg.py [SegmentedData] [Fraction] [TotalHistories] [NeutronEnergy]
+    ./python DistributionsNoSeg.py [SegmentedData] [Fraction] [TotalHistories] [ParticleEnergy] [ParticleName]
 
 """
 
@@ -34,14 +34,15 @@ def read_file(file):
    return data
 
 
-if(len(sys.argv) != 5):
+if(len(sys.argv) != 6):
     raise RuntimeError ("Please pass all the arguments!" ) 
 filename = sys.argv[1]
-FractionIncidentNeutrons = float(sys.argv[2])
-TotalNeutrons = float(sys.argv[3])
-IncidentNeutronEnergy = float(sys.argv[4])
+FractionIncidentParticles = float(sys.argv[2])
+TotalParticles = float(sys.argv[3])
+IncidentParticleEnergy = float(sys.argv[4])
+IncidentParticleName = sys.argv[5]
 
-IncidentNeutrons = FractionIncidentNeutrons * TotalNeutrons
+IncidentParticles = FractionIncidentParticles * TotalParticles
 
 data = read_file(filename)
 imax = len(data)
@@ -166,21 +167,21 @@ MeanDistance = np.zeros(2)
 MeanTOF = np.zeros(2)
 
 plt.figure()
-bins = np.arange(0.1, IncidentNeutronEnergy, 0.01)
+bins = np.arange(0.1, IncidentParticleEnergy, 0.01)
 
 for i in range(len(Edeposition)):
-    plt.hist(Edeposition[i], bins, histtype='step', label='(n,p) ' + str(i+1),
+    plt.hist(Edeposition[i], bins, histtype='step', label='coll. ' + str(i+1),
              linewidth=2.0)
     MeanEnergy[i] = np.mean(Edeposition[i])
-    print('Mean energy (n,p) ' + str(i+1) + ' ' + str(MeanEnergy[i])+ ' MeV')
+    print('Mean energy recoil particles ' + str(i+1) + ' ' + str(MeanEnergy[i])+ ' MeV')
 
-plt.title( str(IncidentNeutronEnergy) + " MeV neutrons with segmentation")
+plt.title( str(IncidentParticleEnergy) + " MeV " + IncidentParticleName + " with segmentation")
 plt.xlabel("Energy[MeV]")
 plt.ylabel("Entries")
 plt.yscale("log")
 plt.legend()
 
-plt.savefig('SegmentRPEnergyDistribution.png', dpi=250, bbox_inches='tight')
+plt.savefig('SegmentEnergyDistribution.png', dpi=250, bbox_inches='tight')
 
 plt.figure()
 bins = np.arange(0.0, 30, 0.1)
@@ -191,7 +192,7 @@ for i in range(len(Distance)):
     MeanDistance[i] = np.mean(Distance[i])
     print('Mean distance ' + str(i+1) + ' - ' + str(i+2) + ' ' + str(MeanDistance[i])+ ' cm')
 
-plt.title( str(IncidentNeutronEnergy) + " MeV neutrons with segmentation")
+plt.title( str(IncidentParticleEnergy) + " MeV " + IncidentParticleName + " with segmentation")
 plt.xlabel("Distance [cm]")
 plt.ylabel("Entries")
 plt.yscale("log")
@@ -200,7 +201,7 @@ plt.legend()
 plt.savefig('SegmentDistancesDistribution.png', dpi=250, bbox_inches='tight')
 
 plt.figure()
-bins = np.arange(0.0, 30, 0.1)
+bins = np.arange(0.0, 15, 0.1)
 
 for i in range(len(TOF)):
     plt.hist(TOF[i], bins, histtype='step', label='TOF ' + str(i+1) + ' - ' + str(i+2),
@@ -208,7 +209,7 @@ for i in range(len(TOF)):
     MeanTOF[i] = np.mean(TOF[i])
     print('Mean TOF ' + str(i+1) + ' - ' + str(i+2) + ' ' + str(MeanTOF[i])+ ' ns')
 
-plt.title( str(IncidentNeutronEnergy) + " MeV neutrons with segmentation")
+plt.title( str(IncidentParticleEnergy) + " MeV " + IncidentParticleName + " with segmentation")
 plt.xlabel("TOF [ns]")
 plt.ylabel("Entries")
 plt.yscale("log")

@@ -11,8 +11,8 @@ The total efficiency is determined as:
     
     N_detected / N_incident
     
-N_detected: Total number of detected neutrons (including also those that scatter only once)
-N_incident: Total number of neutrons incident on the SVSC
+N_detected: Total number of detected particles (including also those that scatter only once)
+N_incident: Total number of incident particles 
 
 """
 
@@ -27,11 +27,11 @@ def read_file(file):
 if(len(sys.argv) != 5):
     raise RuntimeError ("Please pass all the arguments!" ) 
 filename = sys.argv[1]
-FractionIncidentNeutrons = float(sys.argv[2])
-TotalNeutrons = float(sys.argv[3])
-IncidentNeutronEnergy = float(sys.argv[4])
+FractionIncidentParticles = float(sys.argv[2])
+TotalParticles = float(sys.argv[3])
+IncidentParticleEnergy = float(sys.argv[4])
 
-IncidentNeutrons = FractionIncidentNeutrons * TotalNeutrons
+IncidentParticles = FractionIncidentParticles * TotalParticles
 
 data = read_file(filename)
 imax = len(data)
@@ -52,7 +52,10 @@ for i in range(len(data)):
         flag = False
         continue
     
-Efficiency = float(counter) / IncidentNeutrons
+Efficiency = float(counter) / IncidentParticles
 
 
 print("The total detection efficiency is: " + str(Efficiency))
+
+f = open('TotalEfficiency','a')
+f.write('Total efficiency is: ' + str(Efficiency))

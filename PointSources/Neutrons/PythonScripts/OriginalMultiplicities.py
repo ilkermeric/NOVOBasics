@@ -20,11 +20,11 @@ def read_file(file):
 if(len(sys.argv) != 5):
     raise RuntimeError ("Please pass all the arguments!" ) 
 filename = sys.argv[1]
-FractionIncidentNeutrons = float(sys.argv[2])
-TotalNeutrons = float(sys.argv[3])
-IncidentNeutronEnergy = float(sys.argv[4])
+FractionIncidentPhotons = float(sys.argv[2])
+TotalPhotons = float(sys.argv[3])
+IncidentPhotonEnergy = float(sys.argv[4])
 
-IncidentNeutrons = FractionIncidentNeutrons * TotalNeutrons
+IncidentPhotons = FractionIncidentPhotons * TotalPhotons
 
 data = read_file(filename)
 imax = len(data)
@@ -52,7 +52,7 @@ for i in range(len(data)):
         flag = False
         continue
     
-Multiplicities = Multiplicities / IncidentNeutrons
+Multiplicities = Multiplicities / IncidentPhotons
 
 print(Multiplicities)
 
@@ -61,7 +61,7 @@ ypos = np.arange(1,11,1)
 plt.figure()
 
 plt.bar(ypos,Multiplicities[1:],0.35,align='center')
-plt.title( str(IncidentNeutronEnergy) + " MeV neutrons w/o segmentation")
+plt.title( str(IncidentPhotonEnergy) + " MeV neutrons w/o segmentation")
 plt.xlabel("Recoil proton multiplicities")
 plt.ylabel("Normalized entries")
 plt.yscale("log")
@@ -69,4 +69,4 @@ plt.xticks(ypos, ('1', '2', '3', '4', '5', '6', '7', '8', '9', '10+'))
 
 plt.savefig('OriginalMultiplicities.png', dpi=250, bbox_inches='tight')
 
-plt.show()
+#plt.show()

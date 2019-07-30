@@ -124,7 +124,7 @@ plt.figure()
 bins = np.arange(0.1, IncidentNeutronEnergy, 0.01)
 
 for i in range(len(Edeposition)):
-    plt.hist(Edeposition[i], bins, histtype='step', label='(n,p) ' + str(i+1),
+    plt.hist(Edeposition[i], bins, histtype='step', label='coll. ' + str(i+1),
              linewidth=2.0)
     MeanEnergy[i] = np.mean(Edeposition[i])
     print('Mean energy (n,p) ' + str(i+1) + ' ' + str(MeanEnergy[i])+ ' MeV')
@@ -156,7 +156,7 @@ plt.savefig('OriginalDistancesDistribution.png', dpi=250, bbox_inches='tight')
 
 
 plt.figure()
-bins = np.arange(0.0, 30, 0.1)
+bins = np.arange(0.0, 10, 0.1)
 
 for i in range(len(TOF)):
     plt.hist(TOF[i], bins, histtype='step', label='TOF ' + str(i+1) + ' - ' + str(i+2),
@@ -186,4 +186,4 @@ np.savetxt(f3, np.reshape(MeanTOF,(1,2)), delimiter=' ', fmt=['%.10f',
                                                               '%.10f'])
 
 
-plt.show()
+#plt.show()
