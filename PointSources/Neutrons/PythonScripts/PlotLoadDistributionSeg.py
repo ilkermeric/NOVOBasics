@@ -132,8 +132,8 @@ plt.savefig('2DLoadDistribution.png', dpi=250, bbox_inches='tight')
 
 
 f1 = open('DetectorLoad','a')
-f1.write('Total load (hits / incident photon) is: ' + str(TotalLoad) + '\n')
-f1.write('Max. load (hits / incident photon / segment) is: ' + str(HighestLoad) + '\n')
-f1.write('Min. load (hits / incident photon / segment) is: ' + str(SmallestLoad) + '\n')
+f1.write('Total load (hits / incident neutron) is: ' + str(TotalLoad) + '\n')
+f1.write('Max. load (hits / incident neutron / segment) is: ' + str(HighestLoad) + '\n')
+f1.write('Min. load (hits / incident neutron / segment) is: ' + str(SmallestLoad) + '\n')
 
 #plt.show()
