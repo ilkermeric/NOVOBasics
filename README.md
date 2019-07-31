@@ -42,7 +42,12 @@ If you want to run the entire chain of analysis then you will need to have the M
 
 You can enter your comments on the results, scripts and any other aspect in the wiki page:
 
-https://github.com/ilkermeric/NOVOBasics.wiki.git
+git clone https://github.com/ilkermeric/NOVOBasics.wiki.git
+
+This will create a clone of the wiki locally. Otherwise you can use this link directly:
+
+https://github.com/ilkermeric/NOVOBasics/wiki/Discussion
+
 
 # Author
 
