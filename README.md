@@ -40,6 +40,10 @@ https://drive.google.com/open?id=1gVsTBE_sNr3DE-QIsZEukqztjKEGqEu7
 
 If you want to run the entire chain of analysis then you will need to have the MCNP output files and all the python scripts in the same folder. Also, runanalysis.sh are shell scripts that you can run for an automated execution of the analysis chain.
 
+You can enter your comments on the results, scripts and any other aspect in the wiki page:
+
+https://github.com/ilkermeric/NOVOBasics.wiki.git
+
 # Author
 
 * Ilker Meric ([ilkermeric][])
