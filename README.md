@@ -36,6 +36,10 @@ Of course, you need to have both numpy and matplotlib installed and configured c
 
 Also, you will need to download the MCNP output files in binary format from the following link (git is not the environment for large files):
 
+https://drive.google.com/open?id=1gVsTBE_sNr3DE-QIsZEukqztjKEGqEu7
+
+If you want to run the entire chain of analysis then you will need to have the MCNP output files and all the python scripts in the same folder. Also, runanalysis.sh are shell scripts that you can run for an automated execution of the analysis chain.
+
 # Author
 
 * Ilker Meric ([ilkermeric][])
