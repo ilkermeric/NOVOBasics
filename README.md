@@ -35,3 +35,8 @@ git clone https://github.com/ilkermeric/NOVOBasics.git
 Of course, you need to have both numpy and matplotlib installed and configured correctly in your computing environment.
 
 Also, you will need to download the MCNP output files in binary format from the following link (git is not the environment for large files):
+
+# Author
+
+* Ilker Meric ([ilkermeric][])
+[ilkermeric]:  https://github.com/ilkermeric
